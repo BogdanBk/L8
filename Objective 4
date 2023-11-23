@@ -1,0 +1,166 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+// Інтерфейс або абстрактний клас для прототипів даних
+public interface IDataPrototype
+{
+    IDataPrototype Clone();
+}
+
+// Конкретний клас прототипу для CSV-даних
+public class CsvData : IDataPrototype
+{
+    public string[] Fields { get; set; }
+
+    public IDataPrototype Clone()
+    {
+        return new CsvData { Fields = Fields.Clone() as string[] };
+    }
+}
+
+// Конкретний клас прототипу для XML-даних
+public class XmlData : IDataPrototype
+{
+    public string Content { get; set; }
+
+    public IDataPrototype Clone()
+    {
+        return new XmlData { Content = Content };
+    }
+}
+
+// Конкретний клас прототипу для JSON-даних
+public class JsonData : IDataPrototype
+{
+    public string Data { get; set; }
+
+    public IDataPrototype Clone()
+    {
+        return new JsonData { Data = Data };
+    }
+}
+
+// Інтерфейс адаптера для перетворення даних між форматами
+public interface IDataFormatAdapter
+{
+    IDataPrototype ReadData(string filePath);
+    void WriteData(IDataPrototype data, string filePath);
+}
+
+// Адаптер для CSV-формату
+public class CsvDataAdapter : IDataFormatAdapter
+{
+    public IDataPrototype ReadData(string filePath)
+    {
+        // Логіка читання CSV-даних та створення відповідного прототипу
+        Console.WriteLine("Reading CSV data from file: " + filePath);
+        return new CsvData { Fields = new string[] { "Field1", "Field2", "Field3" } };
+    }
+
+    public void WriteData(IDataPrototype data, string filePath)
+    {
+        // Логіка запису CSV-даних
+        Console.WriteLine("Writing CSV data to file: " + filePath);
+    }
+}
+
+// Адаптер для XML-формату
+public class XmlDataAdapter : IDataFormatAdapter
+{
+    public IDataPrototype ReadData(string filePath)
+    {
+        // Логіка читання XML-даних та створення відповідного прототипу
+        Console.WriteLine("Reading XML data from file: " + filePath);
+        return new XmlData { Content = "<xml>Data</xml>" };
+    }
+
+    public void WriteData(IDataPrototype data, string filePath)
+    {
+        // Логіка запису XML-даних
+        Console.WriteLine("Writing XML data to file: " + filePath);
+    }
+}
+
+// Адаптер для JSON-формату
+public class JsonDataAdapter : IDataFormatAdapter
+{
+    public IDataPrototype ReadData(string filePath)
+    {
+        // Логіка читання JSON-даних та створення відповідного прототипу
+        Console.WriteLine("Reading JSON data from file: " + filePath);
+        return new JsonData { Data = "{ \"key\": \"value\" }" };
+    }
+
+    public void WriteData(IDataPrototype data, string filePath)
+    {
+        // Логіка запису JSON-даних
+        Console.WriteLine("Writing JSON data to file: " + filePath);
+    }
+}
+
+// Клас, який використовує адаптер для імпорту та експорту даних
+public class DataProcessor
+{
+    private IDataFormatAdapter sourceAdapter;
+    private IDataFormatAdapter targetAdapter;
+
+    public DataProcessor(IDataFormatAdapter sourceAdapter, IDataFormatAdapter targetAdapter)
+    {
+        this.sourceAdapter = sourceAdapter;
+        this.targetAdapter = targetAdapter;
+    }
+
+    public void ProcessData(string sourceFilePath, string targetFilePath)
+    {
+        // Читання даних за допомогою джерела та адаптера
+        IDataPrototype sourceData = sourceAdapter.ReadData(sourceFilePath);
+
+        // Вивід даних за допомогою призначення та адаптера
+        targetAdapter.WriteData(sourceData, targetFilePath);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Вибір форматів вихідних та цільових даних через консоль
+        Console.Write("Enter source data format (csv/xml/json): ");
+        string sourceFormat = Console.ReadLine();
+
+        Console.Write("Enter target data format (csv/xml/json): ");
+        string targetFormat = Console.ReadLine();
+
+        // Визначення адаптерів залежно від введених форматів
+        IDataFormatAdapter sourceAdapter = GetDataAdapter(sourceFormat);
+        IDataFormatAdapter targetAdapter = GetDataAdapter(targetFormat);
+
+        if (sourceAdapter != null && targetAdapter != null)
+        {
+            // Обробка даних
+            DataProcessor dataProcessor = new DataProcessor(sourceAdapter, targetAdapter);
+            dataProcessor.ProcessData("sourceData.txt", "targetData.txt");
+        }
+        else
+        {
+            Console.WriteLine("Invalid data format entered.");
+        }
+    }
+
+    // Метод для отримання адаптера за введеним форматом
+    static IDataFormatAdapter GetDataAdapter(string format)
+    {
+        switch (format.ToLower())
+        {
+            case "csv":
+                return new CsvDataAdapter();
+            case "xml":
+                return new XmlDataAdapter();
+            case "json":
+                return new JsonDataAdapter();
+            default:
+                return null;
+        }
+    }
+}
