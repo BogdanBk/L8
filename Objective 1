@@ -1,0 +1,75 @@
+using System;
+
+public sealed class ConfigurationManager
+{
+    private static ConfigurationManager instance;
+    private string loggingMode;
+    private string databaseConnection;
+
+    private ConfigurationManager()
+    {
+        // Приватний конструктор, щоб не дозволити створення більше одного екземпляра
+    }
+
+    public static ConfigurationManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new ConfigurationManager();
+            }
+            return instance;
+        }
+    }
+
+    public string LoggingMode
+    {
+        get { return loggingMode; }
+        set
+        {
+            loggingMode = value;
+            Console.WriteLine($"Logging mode set to: {value}");
+        }
+    }
+
+    public string DatabaseConnection
+    {
+        get { return databaseConnection; }
+        set
+        {
+            databaseConnection = value;
+            Console.WriteLine($"Database connection set to: {value}");
+        }
+    }
+
+    public void SaveConfiguration()
+    {
+        // Логіка для збереження конфігурації
+        Console.WriteLine("Configuration saved.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Використання Singleton патерну через Instance в ConfigurationManager
+        ConfigurationManager configManager = ConfigurationManager.Instance;
+
+        // Демонстрація роботи з конфігурацією через консоль
+        Console.WriteLine("Current Configuration:");
+        Console.WriteLine($"Logging Mode: {configManager.LoggingMode}");
+        Console.WriteLine($"Database Connection: {configManager.DatabaseConnection}");
+
+        // Зміна конфігурації через консоль
+        Console.WriteLine("\nChange Configuration:");
+        Console.Write("Enter Logging Mode: ");
+        configManager.LoggingMode = Console.ReadLine();
+        Console.Write("Enter Database Connection: ");
+        configManager.DatabaseConnection = Console.ReadLine();
+
+        // Збереження конфігурації
+        configManager.SaveConfiguration();
+    }
+}
