@@ -1,0 +1,14 @@
+D:\codes\codes for uni\EighthLab\EighthLab\bin\Debug\net6.0\GadgetShop.exe
+D:\codes\codes for uni\EighthLab\EighthLab\bin\Debug\net6.0\GadgetShop.deps.json
+D:\codes\codes for uni\EighthLab\EighthLab\bin\Debug\net6.0\GadgetShop.runtimeconfig.json
+D:\codes\codes for uni\EighthLab\EighthLab\bin\Debug\net6.0\GadgetShop.dll
+D:\codes\codes for uni\EighthLab\EighthLab\bin\Debug\net6.0\GadgetShop.pdb
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\GadgetShop.GeneratedMSBuildEditorConfig.editorconfig
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\GadgetShop.AssemblyInfoInputs.cache
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\GadgetShop.AssemblyInfo.cs
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\GadgetShop.csproj.CoreCompileInputs.cache
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\GadgetShop.dll
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\refint\GadgetShop.dll
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\GadgetShop.pdb
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\GadgetShop.genruntimeconfig.cache
+D:\codes\codes for uni\EighthLab\EighthLab\obj\Debug\net6.0\ref\GadgetShop.dll
